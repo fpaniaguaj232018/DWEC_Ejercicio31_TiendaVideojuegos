@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>PANISHOP</title>
+    <script src="jquery/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" href="css/estilo.css">
+    <script>
+    var menuVisible = false;        
+    $(document).ready(function(){
+        $("#h2Catalogo").click(function(){
+            if ($("#divCatalogo").css("left")=="0px"){
+                return;
+            }
+            $(".seccion").each(
+                function(){
+                    if($(this).css("left")=="0px"){
+                        $(this).animate(
+                            {"left":"-100%"},100);
+                        return;
+                    }
+                }
+            );
+            $("#divCatalogo").animate(
+                {"left":"0px"},100);
+        });
+            /*$("#divPortada").animate(
+                {"left":"-100%"},100);
+            $("#divCatalogo").animate(
+                {"left":"0px"},100);*/
+        $("#divMenu").click(function(){
+            if (!menuVisible){
+                $("#divMenu").animate(
+                    {"left":"-85%"},500);
+                menuVisible=true;
+            } else {
+                $("#divMenu").animate(
+                    {"left":"-95%"},500);
+                menuVisible=false;
+            }
+            //menuVisible=!menuVisible;
+        });
+    });
+    </script>
+</head>
+<body>
+    <div id="divPortada" class="seccion">
+        <H1>PORTADA</H1>
+    </div>
+    <div id="divCatalogo" class="seccion">
+        <H1>CATALOGO</H1>
+    </div>
+    <div id="divCesta" class="seccion">
+        <H1>CESTA</H1>
+    </div>
+    <div id="divMenu" class="seccion">
+        <div id="opciones">
+            <H1>MENU</H1>
+            <H2 id="h2Catalogo">CATALOGO</H2>
+            <H2>CESTA</H2>
+        </div>
+    </div>
+</body>
+</html>

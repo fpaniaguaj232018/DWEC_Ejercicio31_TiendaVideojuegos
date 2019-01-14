@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto|Roboto+Condensed');
+
+*{
+    margin: 0px;
+    font-family: 'Roboto', sans-serif;
+}
+.seccion{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+#divMenu{
+    background-color: darkcyan;
+    left:-95%;
+    top: 5%;
+    height: 90%;
+
+    -webkit-border-radius: 10px 10px 10px 10px;
+    border-radius: 10px 10px 10px 10px;
+}
+#opciones{
+    float: right;
+    padding: 10px;
+}
+
+
+#divPortada{
+    left:0px;
+    top:0px;
+    background-color: aqua;
+}
+#divCatalogo{
+    left:-100%;
+    top:0px;
+    background-color: blueviolet;
+}
+#divCesta{
+    left:-100%;
+    top:0px;
+    background-color: coral;
+}
