@@ -10,26 +10,14 @@
     <script>
     var menuVisible = false;        
     $(document).ready(function(){
-        $("#h2Catalogo").click(function(){
-            if ($("#divCatalogo").css("left")=="0px"){
-                return;
-            }
-            $(".seccion").each(
-                function(){
-                    if($(this).css("left")=="0px"){
-                        $(this).animate(
-                            {"left":"-100%"},100);
-                        return;
-                    }
-                }
-            );
-            $("#divCatalogo").animate(
-                {"left":"0px"},100);
+        $(".navega").click(function(){
+            //La primera alternativa, JS; la segunda, JQuery
+            //var destino = this.getAttribute("idDivSiguiente"));
+            var destino = $(this).attr("idDivSiguiente");
+            transitar(destino);
         });
-            /*$("#divPortada").animate(
-                {"left":"-100%"},100);
-            $("#divCatalogo").animate(
-                {"left":"0px"},100);*/
+            
+        //OCULTA O MUESTRA EL MENÚ LATERAL
         $("#divMenu").click(function(){
             if (!menuVisible){
                 $("#divMenu").animate(
@@ -37,12 +25,30 @@
                 menuVisible=true;
             } else {
                 $("#divMenu").animate(
-                    {"left":"-95%"},500);
+                    {"left":"-100%"},500);
                 menuVisible=false;
             }
-            //menuVisible=!menuVisible;
+
         });
     });
+    function transitar(idDivDestino){
+        idDivDestino = "#" + idDivDestino;
+        //Si h2Catalogo está visible, no hacemos nada
+        if ($(idDivDestino).css("left")=="0px"){
+            return;
+        }
+        //Buscamos la seccion visible y la ocultamos
+        $(".seccion").each(
+            function(){
+                if($(this).css("left")=="0px"){
+                    $(this).animate(
+                        {"left":"-100%"},250);
+                    return;
+                }
+            }
+        );
+        $(idDivDestino).animate({"left":"0px"},250);
+    }
     </script>
 </head>
 <body>
@@ -55,11 +61,12 @@
     <div id="divCesta" class="seccion">
         <H1>CESTA</H1>
     </div>
-    <div id="divMenu" class="seccion">
+    <div id="divMenu" class="seccionMenu">
         <div id="opciones">
             <H1>MENU</H1>
-            <H2 id="h2Catalogo">CATALOGO</H2>
-            <H2>CESTA</H2>
+            <H2 idDivSiguiente="divPortada" class="navega">PORTADA</H2>
+            <H2 idDivSiguiente="divCatalogo" class="navega">CATALOGO</H2>
+            <H2 idDivSiguiente="divCesta" class="navega">CESTA</H2>
         </div>
     </div>
 </body>

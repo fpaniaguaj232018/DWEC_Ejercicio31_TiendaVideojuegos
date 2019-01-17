@@ -4,17 +4,25 @@
     margin: 0px;
     font-family: 'Roboto', sans-serif;
 }
-.seccion{
+.seccionMenu{
     position: absolute;
     width: 100%;
     height: 100%;
 }
 
+.seccion{
+    position: absolute;
+    width: 90%;
+    height: 100%;
+    padding-left: 10%;
+}
+
 #divMenu{
     background-color: darkcyan;
-    left:-95%;
+    left:-100%;
     top: 5%;
     height: 90%;
+    padding-right: 5%;
 
     -webkit-border-radius: 10px 10px 10px 10px;
     border-radius: 10px 10px 10px 10px;
