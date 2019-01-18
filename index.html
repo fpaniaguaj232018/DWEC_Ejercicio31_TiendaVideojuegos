@@ -16,7 +16,6 @@
             var destino = $(this).attr("idDivSiguiente");
             transitar(destino);
         });
-            
         //OCULTA O MUESTRA EL MENÚ LATERAL
         $("#divMenu").click(function(){
             if (!menuVisible){
@@ -30,7 +29,62 @@
             }
 
         });
+        realizarLlamada();
     });
+    function realizarLlamada(){
+        $.ajax({
+            url:"https://fpaniaguaj232018.github.io/juegos_jquery.json",
+            dataType:"json",
+            data:"",
+            contentType:"application/x-www-form-urlencoded; chartset=UTF-8",
+            method:"GET",
+            timeout:1000});
+    };
+    $(document).ajaxSuccess(function(event, jqXHR, ajaxOptions, data){
+        generarHTML(data);
+    });
+    $(document).ajaxError(function(event, jqXHR, ajaxSettings, thrownError){
+        alert("ERROR");
+    });
+
+    function generarHTML(data){
+        /*
+        <div class="ficha">
+            <img height="50%" src="https://d8mkdcmng3.imgix.net/f18c/pc-and-video-games-games-ps4-god-of-war.png?auto=format&bg=0FFF&fit=fill&h=600&q=100&w=600&s=662405d265d55e4a5f7d6446c5a9a40e">
+            <div id="titulo">God Of War</div>
+            <div id="Plataforma">PS4</div>
+            <div id="Precio">50$</div>
+            <div id="Puntos">500 puntos</div>
+        </div>
+        */
+        var numeroFicha = 0;
+        data.videojuegos.forEach(element => {
+            var divFicha = document.createElement("div");
+            divFicha.setAttribute("class","ficha");
+            divFicha.setAttribute("id","ficha"+numeroFicha);
+            $("#divCatalogo").append(divFicha);
+
+            var imagen = document.createElement("img");
+            imagen.setAttribute("height","50%");
+            imagen.setAttribute("src",element.portada);
+
+            var divTitulo = document.createElement("div");
+            divTitulo.setAttribute("id","titulo");
+            var textoTitulo = document.createTextNode(element.titulo);
+            divTitulo.appendChild(textoTitulo);
+
+            var divPrecio = document.createElement("div");
+            divPrecio.setAttribute("id","Precio");
+            var textoPrecio = document.createTextNode(element.precio);
+            divPrecio.appendChild(textoPrecio);
+
+            $("#ficha"+numeroFicha).append(imagen);
+            $("#ficha"+numeroFicha).append(divTitulo);
+            $("#ficha"+numeroFicha).append(divPrecio);
+
+            numeroFicha++;            
+        });
+    }
     function transitar(idDivDestino){
         idDivDestino = "#" + idDivDestino;
         //Si h2Catalogo está visible, no hacemos nada
@@ -57,23 +111,8 @@
     </div>
     <div id="divCatalogo" class="seccion">
         <H1>CATALOGO</H1>
-        <div class="ficha">
-            <img height="50%" src="https://d8mkdcmng3.imgix.net/f18c/pc-and-video-games-games-ps4-god-of-war.png?auto=format&bg=0FFF&fit=fill&h=600&q=100&w=600&s=662405d265d55e4a5f7d6446c5a9a40e">
-            <div id="titulo">
-                God Of War
-            </div>
-            <div id="Plataforma">
-                    PS4
-            </div>
-            <div id="Precio">
-                50$
-            </div>
-            <div id="Puntos">
-                500 puntos
-            </div>
-        </div>
-        <div class="ficha"></div>
-        <div class="ficha"></div>
+        
+
     </div>
     <div id="divCesta" class="seccion">
         <H1>CESTA</H1>
