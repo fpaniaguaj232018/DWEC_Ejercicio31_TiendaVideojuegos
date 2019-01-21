@@ -4,6 +4,10 @@
     margin: 0px;
     font-family: 'Roboto', sans-serif;
 }
+
+body {
+    background-color: #0033cc;
+}
 .seccionMenu{
     position: absolute;
     width: 100%;
@@ -13,7 +17,6 @@
 .seccion{
     position: absolute;
     width: 90%;
-    height: 100%;
     padding-left: 10%;
     background-color: #0033cc;
     color: white;
@@ -33,8 +36,6 @@
     float: right;
     padding: 10px;
 }
-
-
 #divPortada{
     left:-100%;
     top:0px;
@@ -42,7 +43,6 @@
 #divCatalogo{
     left:0px;
     top:0px;
-    
 }
 #divCesta{
     left:-100%;
@@ -59,3 +59,8 @@
     margin:auto;
     margin-bottom: 0.5em;
 }
+
+.ficha img{
+    height: 10em;
+}
+

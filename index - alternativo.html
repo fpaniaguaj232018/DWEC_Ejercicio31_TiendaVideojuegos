@@ -38,20 +38,15 @@
             data:"",
             contentType:"application/x-www-form-urlencoded; chartset=UTF-8",
             method:"GET",
-            timeout:1000});
-    };
-    $(document).ajaxSuccess(function(event, jqXHR, ajaxOptions, data){
-        generarHTML(data);
-        $(".agregarACesta").click(function(){
-            var idproducto = $(this).attr("idproducto");
-            var titulo = data.videojuegos[idproducto].titulo;
-            var precio = data.videojuegos[idproducto].precio;
-            //CONSTRUYO UN ARRAY DE OBJETO VIDEOJUEGO
+            timeout:1000,
+            success: function(data, textStatus, jqXHR){
+                generarHTML(data);
+            },
+            error: function(jqXHR,textStatus, errorThrown){
+                alert("ERROR");
+            }
         });
-    });
-    $(document).ajaxError(function(event, jqXHR, ajaxSettings, thrownError){
-        alert("ERROR");
-    });
+    }
 
     function generarHTML(data){
         /*
@@ -84,16 +79,9 @@
             var textoPrecio = document.createTextNode(element.precio);
             divPrecio.appendChild(textoPrecio);
 
-            var divBoton = document.createElement("input");
-            divBoton.setAttribute("type","button");
-            divBoton.setAttribute("value","Agregar");
-            divBoton.setAttribute("class","agregarACesta");
-            divBoton.setAttribute("idProducto",numeroFicha);
-
             $("#ficha"+numeroFicha).append(imagen);
             $("#ficha"+numeroFicha).append(divTitulo);
             $("#ficha"+numeroFicha).append(divPrecio);
-            $("#ficha"+numeroFicha).append(divBoton);
 
             numeroFicha++;            
         });
@@ -109,12 +97,12 @@
             function(){
                 if($(this).css("left")=="0px"){
                     $(this).animate(
-                        {"left":"-100%"},500);
+                        {"left":"-100%"},250);
                     return;
                 }
             }
         );
-        $(idDivDestino).animate({"left":"0px"},500);
+        $(idDivDestino).animate({"left":"0px"},250);
     }
     </script>
 </head>
