@@ -6,9 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>PANISHOP</title>
     <script src="jquery/jquery-3.3.1.min.js"></script>
+    <script src="js/videojuego.js"></script>
     <link rel="stylesheet" href="css/estilo.css">
     <script>
     var menuVisible = false;        
+    var cesta = new Array();
     $(document).ready(function(){
         $(".navega").click(function(){
             //La primera alternativa, JS; la segunda, JQuery
@@ -47,6 +49,7 @@
             var titulo = data.videojuegos[idproducto].titulo;
             var precio = data.videojuegos[idproducto].precio;
             //CONSTRUYO UN ARRAY DE OBJETO VIDEOJUEGO
+            cesta.push(new videojuego(titulo, precio));
         });
     });
     $(document).ajaxError(function(event, jqXHR, ajaxSettings, thrownError){
@@ -100,7 +103,7 @@
     }
     function transitar(idDivDestino){
         idDivDestino = "#" + idDivDestino;
-        //Si h2Catalogo está visible, no hacemos nada
+        //Si idDivDestino está visible, no hacemos nada
         if ($(idDivDestino).css("left")=="0px"){
             return;
         }
@@ -115,6 +118,31 @@
             }
         );
         $(idDivDestino).animate({"left":"0px"},500);
+        if (idDivDestino=="#divCesta"){
+            generarCesta();
+        }
+    }
+
+    function generarCesta(){
+        $("#itemsCesta").html("");
+            for (var i=0;i<cesta.length;i++){
+                $("#itemsCesta").html($("#itemsCesta").html() + 
+                    cesta[i].titulo + 
+                    ":" +
+                    cesta[i].precio);
+                var botonBorrar = document.createElement("input");
+                botonBorrar.setAttribute("type","button");
+                botonBorrar.setAttribute("value","borrar");
+                botonBorrar.setAttribute("idItemCesta",i);
+                botonBorrar.setAttribute("class","borrable");
+                botonBorrar.setAttribute("id","botonBorrar"+i);
+                $("#itemsCesta").append(botonBorrar);
+                $("#itemsCesta").append("<br>");
+            }
+            $(".borrable").click(function(){
+                cesta.splice($(this).attr("idItemCesta"),1);
+                generarCesta();
+            });
     }
     </script>
 </head>
@@ -127,6 +155,7 @@
     </div>
     <div id="divCesta" class="seccion">
         <H1>CESTA</H1>
+        <P id="itemsCesta"></P>
     </div>
     <div id="divMenu" class="seccionMenu">
         <div id="opciones">
